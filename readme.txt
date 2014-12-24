@@ -1,4 +1,4 @@
-=== Plugin Name ===
+=== LowerMedia iFrames On Demand ===
 Contributors: hawkeye126
 Donate link: http://lowermedia.net
 Tags: optimization, iframes, multisite, speed, youtube, vimeo, soundcloud, dailymotion
