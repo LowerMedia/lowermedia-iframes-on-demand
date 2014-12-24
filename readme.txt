@@ -8,7 +8,7 @@ Stable tag: 4.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Reduce requests and optimize for speed!!! The iFrames On Demand plugin replaces all iframes on the page with an image placeholder, when the image placeholder is clicked the image appears.  This works without any configuration for all iframes and will pull in video thumbnails for YouTube, Vimeo and DailyMotion.
+Automatically add iframe placeholder images, reduce page requests, increase load speed!
 
 == Description ==
 
@@ -31,10 +31,6 @@ Yes
 = How to I change the placement of the play button? =
 
 Manually through a child theme or css plugin
-
-== Screenshots ==
-
-
 
 == Changelog ==
 
