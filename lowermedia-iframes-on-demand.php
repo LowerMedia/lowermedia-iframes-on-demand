@@ -58,7 +58,7 @@
         if ( 'iframe-ondemand' !== $handle )
             return $tag;
 
-        return str_replace( ' src', ' data-cfasync="false" src', $tag );
+        return str_replace( "type='text/javascript' src", ' data-cfasync="false" src', $tag );
     }, 10, 2 );
 
 
