@@ -45,3 +45,22 @@
 		wp_localize_script('iframe-ondemand', 'iframeOnDemand', array('myurl' => plugins_url( '/' , __FILE__ )));
 	}  
 	add_action( 'wp_enqueue_scripts', 'lowermedia_iframe_ondemand' ); 
+
+/*############################################################################################
+#
+#   ADD ATTRIBUTE TO SCRIPT
+#   Disable cloudflare rocket loader as it breaks the plugin
+#
+*/
+
+    add_filter( 'script_loader_tag', function ( $tag, $handle ) {
+
+        if ( 'iframe-ondemand' !== $handle )
+            return $tag;
+
+        return str_replace( ' src', ' data-cfasync="false" src', $tag );
+    }, 10, 2 );
+
+
+
+
