@@ -40,7 +40,7 @@
 */
 	function lowermedia_iframe_ondemand()  
 	{  
-		wp_register_script( 'iframe-ondemand', plugins_url( '/lowermedia-iframes-on-demand.js' , __FILE__ ), array( 'jquery' ), '1.0.0', true);
+		wp_register_script( 'iframe-ondemand', plugins_url( '/lowermedia-iframes-on-demand.js' , __FILE__ ), array( 'jquery' ), '1.0.0', false);
 		wp_enqueue_script( 'iframe-ondemand' );
 		wp_localize_script('iframe-ondemand', 'iframeOnDemand', array('myurl' => plugins_url( '/' , __FILE__ )));
 	}  
