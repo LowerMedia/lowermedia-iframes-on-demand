@@ -55,12 +55,9 @@
 
     // add_filter( 'script_loader_tag', function ( $tag, $handle ) {
 
-    //     if ( 'iframe-ondemand' !== $handle )
+    //     if ( 'jquery' !== $handle )
     //         return $tag;
 
     //     return str_replace( "type='text/javascript' src", ' data-cfasync="false" src', $tag );
     // }, 10, 2 );
-
-
-
 
