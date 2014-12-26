@@ -5,22 +5,24 @@
 #
 */
 
-function vimeoLoadingThumb(id) {
-	var url = "http://vimeo.com/api/v2/video/" + id + ".json?callback=showThumb";
-	console.log(url);
-	var id_img = "#vimeo-" + id;
-	var script = document.createElement( 'script' );
-	script.type = 'text/javascript';
-	script.src = url;
-	jQuery(id_img).before(script);
-}
+    
+    function vimeoLoadingThumb(id) {
+		var url = "http://vimeo.com/api/v2/video/" + id + ".json?callback=showThumb";
+		console.log(url);
+		var id_img = "#vimeo-" + id;
+		var script = document.createElement( 'script' );
+		script.type = 'text/javascript';
+		script.src = url;
+		jQuery(id_img).before(script);
+	}
 
-function showThumb(data){
-	var id_img = "#vimeo-" + data[0].id;
-	jQuery(id_img).attr('src',data[0].thumbnail_large);
-}
+	function showThumb(data){
+		var id_img = "#vimeo-" + data[0].id;
+		jQuery(id_img).attr('src',data[0].thumbnail_large);
+	}
 
 jQuery(document).ready(function(){
+
 	jQuery('body').addClass('iframes-ondemand');
 	var count = 0;
 
