@@ -56,15 +56,15 @@ jQuery(document).ready(function(){
 		var placeholderImg;
 
 		if (src.indexOf("youtube")!=-1) {
-			placeholderImg = "<img id='iframe-"+ count +"' class='iframe-youtube iframe-ondemand-placeholderImg iframe-"+ count +"' style='height:"+ height +";width:"+ width +";' src='http://img.youtube.com/vi/"+ shortSRC +"/0.jpg' height="+ height +" width="+ width +" />";
+			placeholderImg = "<img id='iframe-"+ count +"' class='iframe-youtube iframe-ondemand-placeholderImg iframe-"+ count +"' style='height:"+ height +"px;width:"+ width +"px;' src='http://img.youtube.com/vi/"+ shortSRC +"/0.jpg' height="+ height +" width="+ width +" />";
 		} else if (src.indexOf("vimeo")!=-1) {
-			placeholderImg = "<img id='vimeo-"+ shortSRC +"' class='iframe-vimeo iframe-ondemand-placeholderImg iframe-"+ count +"' style='height:"+ height +";width:"+ width +";' src='' height="+ height +" width="+ width +" />";
+			placeholderImg = "<img id='vimeo-"+ shortSRC +"' class='iframe-vimeo iframe-ondemand-placeholderImg iframe-"+ count +"' style='height:"+ height +"px;width:"+ width +"px;' src='' height="+ height +" width="+ width +" />";
 		} else if (src.indexOf("soundcloud")!=-1) {
-			placeholderImg = "<img id='iframe-"+ count +"' class='iframe-soundcloud iframe-ondemand-placeholderImg iframe-"+ count +"' style='height:"+ height +";width:"+ width +";' src='"+pluginUrl+"iframe-on-demand-play-soundcloud.svg' height="+ height +" width="+ width +" />";
+			placeholderImg = "<img id='iframe-"+ count +"' class='iframe-soundcloud iframe-ondemand-placeholderImg iframe-"+ count +"' style='height:"+ height +"px;width:"+ width +"px;' src='"+pluginUrl+"iframe-on-demand-play-soundcloud.svg' height="+ height +" width="+ width +" />";
 		} else if (src.indexOf("dailymotion")!=-1) {
-			placeholderImg = "<img id='iframe-"+ count +"' class='iframe-dailymotion iframe-ondemand-placeholderImg iframe-"+ count +"' style='height:"+ height +";width:"+ width +";' src='http://www.dailymotion.com/thumbnail/video/"+ shortSRC +"' height="+ height +" width="+ width +" />";
+			placeholderImg = "<img id='iframe-"+ count +"' class='iframe-dailymotion iframe-ondemand-placeholderImg iframe-"+ count +"' style='height:"+ height +"px;width:"+ width +"px;' src='http://www.dailymotion.com/thumbnail/video/"+ shortSRC +"' height="+ height +" width="+ width +" />";
 		} else {
-			placeholderImg = "<img id='iframe-"+ count +"' class='iframe-undetermined iframe-ondemand-placeholderImg iframe-"+ count +"' style='height:"+ height +";width:"+ width +";' height="+ height +" width="+ width +" />";
+			placeholderImg = "<img id='iframe-"+ count +"' class='iframe-undetermined iframe-ondemand-placeholderImg iframe-"+ count +"' style='height:"+ height +"px;width:"+ width +"px;' height="+ height +" width="+ width +" />";
 		}
 
 		//CREATE IFRAME VIDEO TO BE SHOWN AFTER PLACEHOLDER IMAGE IS CLICKED
