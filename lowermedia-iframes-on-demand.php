@@ -9,7 +9,8 @@
  * Network: False
  * License: GPL2
  */
- /*  Copyright 2014 Pete Lower (email : pete@petelower.com)
+
+ /**  Copyright 2014 Pete Lower (email : pete@petelower.com)
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License, version 2, as 
@@ -24,19 +25,19 @@
     along with this program; if not, write to the Free Software
     Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  */ 
-/*############################################################################################
-#
-#   SECURITY: BLOCK DIRECT ACCESS TO FILE
-#
+
+/**
+*
+*   SECURITY: BLOCK DIRECT ACCESS TO FILE
+*
 */
 
     defined('ABSPATH') or die("Cannot access pages directly.");
 
-/*############################################################################################
-#
-#   ENQUEUE AND LOCALIZE
-#   Enqueue our 'iFrame On Demand' script and localize the plugin path for local asset use
-#
+/**
+*   ENQUEUE AND LOCALIZE
+*   Enqueue our 'iFrame On Demand' script and localize the plugin path for local asset use
+*
 */
 
 if ( ! class_exists( 'LowerMedia_iFrame_OnDemand' ) ) :
@@ -53,7 +54,7 @@ if ( ! class_exists( 'LowerMedia_iFrame_OnDemand' ) ) :
         }
 
         static function add_scripts() {
-            wp_register_script( 'iframe-ondemand', self::get_url( '/lowermedia-iframes-on-demand.js' , __FILE__ ), array( 'jquery' ), self::version, false);
+            wp_register_script( 'iframe-ondemand', self::get_url( 'lowermedia-iframes-on-demand.js'), array( 'jquery' ), self::version, false);
             wp_enqueue_script( 'iframe-ondemand' );
             wp_localize_script('iframe-ondemand', 'iframeOnDemand', array('myurl' => plugins_url( '/' , __FILE__ )));
         }
@@ -67,11 +68,10 @@ if ( ! class_exists( 'LowerMedia_iFrame_OnDemand' ) ) :
 
 endif;
 
-/*############################################################################################
-#
-#   ADD ATTRIBUTE TO SCRIPT
-#   Disable cloudflare rocket loader as it breaks the plugin
-#
+/**
+*   ADD ATTRIBUTE TO SCRIPT
+*   Disable cloudflare rocket loader as it breaks the plugin
+*
 */
 
     // add_filter( 'script_loader_tag', function ( $tag, $handle ) {
