@@ -43,11 +43,17 @@ function getMeasurement(obj, measurement){
 
 jQuery(document).ready(function(){
 
+	//IF THERE ARE NO IFRAMES END FUNCTION
+	if(jQuery("iframe").size() === 0){return;}
+
 	jQuery('body').addClass('iframes-ondemand');
 	var count = 0;
 
 	//SELECT EACH IFRAME FOR MANIPULATION
 	jQuery("iframe").each(function() {
+
+		//IF THIS IFRAME HAS THE 'no-placeholder' CLASS WE MOVE ON TO THE NEXT
+		if(jQuery(this).hasClass('no-placeholder')) { return; }
 
 		count ++;
 		var  src = jQuery(this).attr('src'), //fetch plugin url path
