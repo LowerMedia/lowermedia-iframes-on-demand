@@ -50,17 +50,12 @@ jQuery(document).ready(function(){
 	jQuery("iframe").each(function() {
 
 		count ++;
-		var src = jQuery(this).attr('src');
-		//fetch plugin url path
-		var pluginUrl = ( iframeOnDemand.myurl );
-		//extract end of url
-		var shortSRC = src.substring(src.lastIndexOf( '/' ) + 1 );
+		var  src = jQuery(this).attr('src'), //fetch plugin url path
+		pluginUrl = ( iframeOnDemand.myurl ), //extract end of url
+		width = getMeasurement(this, 'width'), //fetch original iframe src width
+		height = getMeasurement(this, 'height'), //fetch original iframe src height
+		shortSRC = src.substring(src.lastIndexOf( '/' ) + 1 );
 		shortSRC = shortSRC.split( '?' )[ 0 ];
-		var output = count + " " + src + " " + shortSRC;
-		var height, width;
-
-		width = getMeasurement(this, 'width');
-		height = getMeasurement(this, 'height');
 
 		intWidth = ( ( parseInt( width,10 ) )/ 1.05 ) - 85;
 
