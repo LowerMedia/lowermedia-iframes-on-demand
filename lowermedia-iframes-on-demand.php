@@ -11,34 +11,34 @@
  */
 
  /**  Copyright 2014 Pete Lower (email : pete@petelower.com)
-
-    This program is free software; you can redistribute it and/or modify
-    it under the terms of the GNU General Public License, version 2, as 
-    published by the Free Software Foundation.
-
-    This program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
-
-    You should have received a copy of the GNU General Public License
-    along with this program; if not, write to the Free Software
-    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+ *
+ *   This program is free software; you can redistribute it and/or modify
+ *   it under the terms of the GNU General Public License, version 2, as 
+ *   published by the Free Software Foundation.
+ *
+ *   This program is distributed in the hope that it will be useful,
+ *   but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *   GNU General Public License for more details.
+ *
+ *   You should have received a copy of the GNU General Public License
+ *   along with this program; if not, write to the Free Software
+ *   Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  */ 
 
 /**
-*
-*   SECURITY: BLOCK DIRECT ACCESS TO FILE
-*
-*/
+ *
+ *   SECURITY: BLOCK DIRECT ACCESS TO FILE
+ *
+ */
 
     defined('ABSPATH') or die("Cannot access pages directly.");
 
 /**
-*   ENQUEUE AND LOCALIZE
-*   Enqueue our 'iFrame On Demand' script and localize the plugin path for local asset use
-*
-*/
+ *   ENQUEUE AND LOCALIZE
+ *   Enqueue our 'iFrame On Demand' script and localize the plugin path for local asset use
+ *
+ */
 
 if ( ! class_exists( 'LowerMedia_iFrame_OnDemand' ) ) :
 
@@ -69,10 +69,10 @@ if ( ! class_exists( 'LowerMedia_iFrame_OnDemand' ) ) :
 endif;
 
 /**
-*   ADD ATTRIBUTE TO SCRIPT
-*   Disable cloudflare rocket loader as it breaks the plugin
-*
-*/
+ *   ADD ATTRIBUTE TO SCRIPT
+ *   Disable cloudflare rocket loader as it breaks the plugin
+ *
+ */
 
     // add_filter( 'script_loader_tag', function ( $tag, $handle ) {
 
