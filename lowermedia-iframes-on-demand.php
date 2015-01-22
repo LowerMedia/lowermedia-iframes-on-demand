@@ -30,21 +30,42 @@
 #
 */
 
-	defined('ABSPATH') or die("Cannot access pages directly.");
+    defined('ABSPATH') or die("Cannot access pages directly.");
 
 /*############################################################################################
 #
-#	ENQUEUE AND LOCALIZE
+#   ENQUEUE AND LOCALIZE
 #   Enqueue our 'iFrame On Demand' script and localize the plugin path for local asset use
 #
 */
-	function lowermedia_iframe_ondemand()  
-	{  
-		wp_register_script( 'iframe-ondemand', plugins_url( '/lowermedia-iframes-on-demand.js' , __FILE__ ), array( 'jquery' ), '1.0.0', false);
-		wp_enqueue_script( 'iframe-ondemand' );
-		wp_localize_script('iframe-ondemand', 'iframeOnDemand', array('myurl' => plugins_url( '/' , __FILE__ )));
-	}  
-	add_action( 'wp_enqueue_scripts', 'lowermedia_iframe_ondemand' ); 
+
+if ( ! class_exists( 'LowerMedia_iFrame_OnDemand' ) ) :
+
+    class LowerMedia_iFrame_OnDemand {
+
+        const version = '1.0.0';
+
+        static function init() {
+            if ( is_admin() )
+                return;
+
+            add_action( 'wp_enqueue_scripts', array( __CLASS__, 'add_scripts' ) );
+        }
+
+        static function add_scripts() {
+            wp_register_script( 'iframe-ondemand', self::get_url( '/lowermedia-iframes-on-demand.js' , __FILE__ ), array( 'jquery' ), self::version, false);
+            wp_enqueue_script( 'iframe-ondemand' );
+            wp_localize_script('iframe-ondemand', 'iframeOnDemand', array('myurl' => plugins_url( '/' , __FILE__ )));
+        }
+
+        static function get_url( $path = '' ) {
+            return plugins_url( ltrim( $path, '/' ), __FILE__ );
+        }
+    }
+
+    LowerMedia_iFrame_OnDemand::init();
+
+endif;
 
 /*############################################################################################
 #
