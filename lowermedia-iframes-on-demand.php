@@ -84,7 +84,8 @@ if ( ! class_exists( 'LowerMedia_iFrame_OnDemand' ) ) :
             // Wrap in conditional to prevent loading empty dom
             if($content!=''){$dom->loadHTML($content);}
             $iframes = $dom->getElementsByTagName('iframe'); 
-            $count = $iframes->length - 1; 
+            $count = $iframes->length - 1;
+            $initial_count = $iframes->length - 1; 
 
             while ($count > -1) { 
 
@@ -109,7 +110,8 @@ if ( ! class_exists( 'LowerMedia_iFrame_OnDemand' ) ) :
                 $height = $iframe->getAttribute('height');
                 $play_button_marleft = $width/0.94107;
                 $play_button_martop = $height/2.60;
-                $play_script = $dom->createElement( 'style' , '.iframe-'.$count.'{height:'.$height.'px;width:'.$width.'px;}.iframes-ondemand .dashicons { content: "\f236"; font-size: 75px; color: #CC181E; } .iframes-ondemand .dashicons:hover { color: grey; } .iframes-ondemand .'.self::return_video_type($src).'-dashicon.dashicons-video-alt3:before { margin-left:-'.$play_button_marleft.'px; margin-top:'.$play_button_martop.'px; display: inline-block; }' );
+                $play_script = $dom->createElement( 'style' , '.iframe-'.$count.'{height:'.$height.'px;width:'.$width.'px;} .iframes-ondemand .'.self::return_video_type($src).'-dashicon.dashicons-video-alt3:before { margin-left:-'.$play_button_marleft.'px; margin-top:'.$play_button_martop.'px; display: inline-block; }' );
+                $play_script_single = $dom->createElement( 'style' , '.iframes-ondemand .dashicons { content: "\f236"; font-size: 75px; color: rgba(204, 24, 30, 0.85); } .iframes-ondemand .dashicons:hover { color: rgba(128, 128, 128, 0.85); }' );
                 
                 //build placeholder image
                 $image = $dom->createElement('img');
@@ -122,6 +124,11 @@ if ( ! class_exists( 'LowerMedia_iFrame_OnDemand' ) ) :
                 $image->setAttribute('data-iframe-number', $count);
                 $image->setAttribute('data-iframe-type', self::return_video_type($src));
 
+
+                if ($count == $initial_count) {
+                    //append the play button script single last image                        
+                    $iframe->parentNode->appendChild($play_script_single);
+                }
                 //append the play button script to the end of the image                        
                 $iframe->parentNode->appendChild($play_script);
                 //replace iframe with image (with appended play script included)
