@@ -171,13 +171,13 @@ endif;
  *
  */
 
-    // add_filter( 'script_loader_tag', function ( $tag, $handle ) {
+    add_filter( 'script_loader_tag', function ( $tag, $handle ) {
 
-    //     if ( 'jquery' !== $handle )
-    //         return $tag;
+        if ( 'jquery' !== $handle )
+            return $tag;
 
-    //     return str_replace( "type='text/javascript' src", ' data-cfasync="false" src', $tag );
-    // }, 10, 2 );
+        return str_replace( "type='text/javascript' src", ' data-cfasync="false" src', $tag );
+    }, 10, 2 );
 
 
 // Don't lazyload for feeds, previews, mobile
