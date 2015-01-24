@@ -8,8 +8,30 @@ jQuery(function() {
 
 	var precount = 0;
 	jQuery(".iframe-ondemand-placeholderImg").each(function(){
+
 		jQuery(this).after("<span class='dashicons dashicons-video-alt3 play-button-overlay play-button-overlay-"+precount+"'></span>");
 		precount++;
+
+	});
+
+});
+
+/**
+ *  FIND THE VIMEO IMAGES AND REPLACE THEM WITH THE PROPER PLACEHOLDER IMAGE
+ *
+ *
+ */
+
+jQuery(function() {
+
+	jQuery(".iframe-vimeo").each(function() {
+
+		var  src = jQuery(this).attr('data-iframe-src'), //fetch plugin url path
+		shortSRC = src.substring(src.lastIndexOf( '/' ) + 1 );
+		shortSRC = shortSRC.split( '?' )[ 0 ];
+		jQuery(this).attr('id','vimeo-'+shortSRC);
+		vimeoLoadingThumb(shortSRC);
+
 	});
 
 });
@@ -23,7 +45,6 @@ jQuery(function() {
 function vimeoLoadingThumb(id) {
 
 	var url = "http://vimeo.com/api/v2/video/" + id + ".json?callback=showThumb";
-	console.log('Vimeo Loading Thumb Function Output:'+url);
 	var id_img = "#vimeo-" + id;
 	var script = document.createElement( 'script' );
 	script.type = 'text/javascript';
@@ -46,25 +67,16 @@ function showThumb(data){
 }
 
 /**
- *
+ *  IFRAMES ON DEMAND FUNCTION: THIS REPLACES ALL ON DEMAND
+ *	PLACEHOLDERS WITH THEIR VIDEO WHEN CLICKED
  *
  *
  */
 
 jQuery(document).ready(function(){
+
 	//LET PEOPLE KNOW WE'RE UP AND RUNNING, ALSO FOR USE IN CSS SCRIPT
 	jQuery('body').addClass('iframes-ondemand');
-
-	//FIND THE VIMEO IMAGES AND REPLACE THEM WITH THE PROPER PLACEHOLDER IMAGE
-	jQuery(".iframe-vimeo").each(function() {
-
-		var  src = jQuery(this).attr('data-iframe-src'), //fetch plugin url path
-		shortSRC = src.substring(src.lastIndexOf( '/' ) + 1 );
-		shortSRC = shortSRC.split( '?' )[ 0 ];
-		jQuery(this).attr('id','vimeo-'+shortSRC);
-		vimeoLoadingThumb(shortSRC);
-
-	});
 
 	var backCount = jQuery(".iframe-ondemand-placeholderImg").size();
 	var count = 0;
@@ -76,7 +88,6 @@ jQuery(document).ready(function(){
 
 		//CREATE IFRAME VIDEO TO BE SHOWN AFTER PLACEHOLDER IMAGE IS CLICKED
 		var video = '<iframe width="'+ jQuery(this).attr('width') +'" height="'+ jQuery(this).attr('height') +'" border="2" src="'+ jQuery(this).attr('data-iframe-src') +'"></iframe>';
-
 		var video_number = jQuery(this).attr('data-iframe-number');
 
 		//remove the play button on click
@@ -92,7 +103,7 @@ jQuery(document).ready(function(){
 		});
 
 		count++;
-
+		
 	});
 });
 
