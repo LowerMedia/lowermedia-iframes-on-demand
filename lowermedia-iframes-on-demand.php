@@ -94,9 +94,10 @@ if ( ! class_exists( 'LowerMedia_iFrame_OnDemand' ) ) :
                 $short_src = $short_src[0];//build the short src for later use
                 $width = $iframe->getAttribute('width');
                 $height = $iframe->getAttribute('height');
+                $play_button_marleft = $width/0.94107;
+                $play_button_martop = $height/2.60;
+                $play_script = $dom->createElement( 'style' , '.iframe-'.$count.'{height:'.$height.'px;width:'.$width.'px;}.iframes-ondemand .dashicons { content: "\f236"; font-size: 75px; color: #CC181E; } .iframes-ondemand .dashicons:hover { color: grey; } .iframes-ondemand .'.self::return_video_type($src).'-dashicon.dashicons-video-alt3:before { margin-left:-'.$play_button_marleft.'px; margin-top:'.$play_button_martop.'px; display: inline-block; }' );
                 
-                $play_script = $dom->createElement( 'style' , '.iframe-'.$count.'{height:'.$height.'px;width:'.$width.'px;}.iframes-ondemand .dashicons { content: "\f236"; font-size: 75px; color: #CC181E; } .iframes-ondemand .dashicons:hover { color: grey; } .iframes-ondemand .dashicons-video-alt3:before { margin-left:-'.$width/0.925.'px; margin-top:'.$height/2.50.'px; display: inline-block; }' );
-
                 //build placeholder image
                 $image = $dom->createElement('img');
                 //set placeholder image attributes
@@ -106,6 +107,7 @@ if ( ! class_exists( 'LowerMedia_iFrame_OnDemand' ) ) :
                 $image->setAttribute('width', $width);
                 $image->setAttribute('data-iframe-src', $src);
                 $image->setAttribute('data-iframe-number', $count);
+                $image->setAttribute('data-iframe-type', self::return_video_type($src));
 
                 //append the play button script to the end of the image                        
                 $iframe->parentNode->appendChild($play_script);
