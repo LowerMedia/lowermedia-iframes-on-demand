@@ -9,7 +9,8 @@ jQuery(function() {
 	var precount = 0;
 	jQuery(".iframe-ondemand-placeholderImg").each(function(){
 
-		jQuery(this).after("<span class='dashicons dashicons-video-alt3 play-button-overlay play-button-overlay-"+precount+"'></span>");
+		var video_type = jQuery(this).attr('data-iframe-type');
+		jQuery(this).after("<span class='"+video_type+"-dashicon dashicons dashicons-video-alt3 play-button-overlay play-button-overlay-"+precount+"'></span>");
 		precount++;
 
 	});
@@ -103,7 +104,7 @@ jQuery(document).ready(function(){
 		});
 
 		count++;
-		
+
 	});
 });
 
