@@ -1,10 +1,9 @@
 /**
- *
+ *  ADD THE DASHICON SPAN AFTER THE DIV SO OUR :BEFORE STYLES WORK
  *
  *
  */
 
-//ADD THE DASHICON SPAN AFTER THE DIV SO OUR :BEFORE STYLES WORK
 jQuery(function() {
 
 	var precount = 0;
@@ -15,7 +14,12 @@ jQuery(function() {
 
 });
 
-//BUILD VIMEO ONDEMAND PLACEHOLDER IMAGE
+/**
+ *  BUILD VIMEO ONDEMAND PLACEHOLDER IMAGE
+ *
+ *
+ */
+
 function vimeoLoadingThumb(id) {
 
 	var url = "http://vimeo.com/api/v2/video/" + id + ".json?callback=showThumb";
@@ -28,13 +32,24 @@ function vimeoLoadingThumb(id) {
 
 }
 
-//CALLBACK FUNCTION TO SHOW PLACEHOLDER IMAGE
+/**
+ *  CALLBACK FUNCTION TO SHOW PLACEHOLDER IMAGE
+ *
+ *
+ */
+
 function showThumb(data){
 
 	var id_img = "#vimeo-" + data[0].id;
 	jQuery(id_img).attr( 'src', data[0].thumbnail_large );
 
 }
+
+/**
+ *
+ *
+ *
+ */
 
 jQuery(document).ready(function(){
 	//LET PEOPLE KNOW WE'RE UP AND RUNNING, ALSO FOR USE IN CSS SCRIPT
