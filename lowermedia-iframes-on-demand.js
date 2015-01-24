@@ -62,16 +62,17 @@ jQuery(document).ready(function(){
 		//CREATE IFRAME VIDEO TO BE SHOWN AFTER PLACEHOLDER IMAGE IS CLICKED
 		var video = '<iframe width="'+ jQuery(this).attr('width') +'" height="'+ jQuery(this).attr('height') +'" border="2" src="'+ jQuery(this).attr('data-iframe-src') +'"></iframe>';
 
+		var video_number = jQuery(this).attr('data-iframe-number');
 
 		//remove the play button on click
-		// jQuery(".play-button-overlay-"+backCount).click(function(){
-		// 	jQuery('.iframe-'+count).replaceWith(video);
-		// 	jQuery(this).remove();
-		// });
+		jQuery(".play-button-overlay-"+jQuery(this).attr('data-iframe-number')).click(function(){
+			jQuery('.iframe-'+video_number).replaceWith(video);
+			jQuery(this).remove();
+		});
 
 		//remove the image and replace it with the iframe
-		jQuery('.iframe-'+count).click(function(){
-			jQuery(".play-button-overlay-"+backCount).remove();
+		jQuery(this).click(function(){
+			jQuery(this).parent().children('.play-button-overlay').remove();
 			jQuery(this).replaceWith(video);
 		});
 

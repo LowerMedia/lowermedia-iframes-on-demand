@@ -103,6 +103,7 @@ if ( ! class_exists( 'LowerMedia_iFrame_OnDemand' ) ) :
                         $image->setAttribute('height', $height);
                         $image->setAttribute('width', $width);
                         $image->setAttribute('data-iframe-src', $src);
+                        $image->setAttribute('data-iframe-number', $count);
 
 
                         //replace iframe with image
