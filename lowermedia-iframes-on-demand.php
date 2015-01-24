@@ -1,10 +1,10 @@
 <?php
 /**
  * Plugin Name: LowerMedia iFrames On Demand
- * Plugin URI: http://
+ * Plugin URI: http://lowermedia.net/iframes-on-demand-speed-up-your-wordpress-site/
  * Description: Reduce requests and optimize for speed!!! The iFrames On Demand plugin replaces all iframes on the page with an image placeholder, when the image placeholder is clicked the image appears.  This works without any configuration for all iframes and will pull in video thumbnails for YouTube, Vimeo and DailyMotion.
- * Version: 1.0.5
- * Author: Pete Lower
+ * Version: 1.1.0
+ * Author: Pete Lower, LowerMedia
  * Author URI: http://petelower.com
  * Network: False
  * License: GPL2
@@ -44,7 +44,7 @@ if ( ! class_exists( 'LowerMedia_iFrame_OnDemand' ) ) :
 
     class LowerMedia_iFrame_OnDemand {
 
-        const version = '1.0.5';
+        const version = '1.1.0';
 
         static function init() {
             if ( is_admin() )
