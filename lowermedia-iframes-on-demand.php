@@ -77,9 +77,7 @@ if ( ! class_exists( 'LowerMedia_iFrame_OnDemand' ) ) :
                 $iframe = $iframes->item($count); 
                 $ignore = false; 
 
-                //save iframe information
-                $src = $iframe->getAttribute('src');
-
+                //test for no-placeholder class
                 // $classes = explode( " ",$iframe->getAttribute('class'));
                 // echo 'Classes:'.$classes[0].'<br />';
                 // foreach ($classes as $class){
@@ -89,36 +87,35 @@ if ( ! class_exists( 'LowerMedia_iFrame_OnDemand' ) ) :
                 //     }
                 // }
 
-                        $short_src = explode("?",substr(strrchr($src, "/"), 1));
-                        $short_src = $short_src[0];//build the short src for later use
-                        echo $short_src.'<br />';
-                        $width = $iframe->getAttribute('width');
-                        $height = $iframe->getAttribute('height');
-                        
-                        $play_script = $dom->createElement( 'style' , '.iframe-'.$count.'{height:'.$height.'px;width:'.$width.'px;}.iframes-ondemand .dashicons { content: "\f236"; font-size: 75px; color: #CC181E; } .iframes-ondemand .dashicons:hover { color: grey; } .iframes-ondemand .dashicons-video-alt3:before { margin-left:-'.$width/0.925.'px; margin-top:'.$height/2.50.'px; display: inline-block; }' );
+                //save iframe information to variables
+                $src = $iframe->getAttribute('src');
+                $short_src = explode("?",substr(strrchr($src, "/"), 1));
+                $short_src = $short_src[0];//build the short src for later use
+                $width = $iframe->getAttribute('width');
+                $height = $iframe->getAttribute('height');
+                
+                $play_script = $dom->createElement( 'style' , '.iframe-'.$count.'{height:'.$height.'px;width:'.$width.'px;}.iframes-ondemand .dashicons { content: "\f236"; font-size: 75px; color: #CC181E; } .iframes-ondemand .dashicons:hover { color: grey; } .iframes-ondemand .dashicons-video-alt3:before { margin-left:-'.$width/0.925.'px; margin-top:'.$height/2.50.'px; display: inline-block; }' );
 
-                        //build placeholder image
-                        $image = $dom->createElement('img');
-                        $image->setAttribute('class', 'iframe-'.self::return_video_type($src).' iframe-'.$count.' iframe-ondemand-placeholderImg');
-                        $image->setAttribute('src', self::build_placeholder_src($short_src, $src));
-                        $image->setAttribute('height', $height);
-                        $image->setAttribute('width', $width);
-                        $image->setAttribute('data-iframe-src', $src);
-                        $image->setAttribute('data-iframe-number', $count);
+                //build placeholder image
+                $image = $dom->createElement('img');
+                //set placeholder image attributes
+                $image->setAttribute('class', 'iframe-'.self::return_video_type($src).' iframe-'.$count.' iframe-ondemand-placeholderImg');
+                $image->setAttribute('src', self::build_placeholder_src($short_src, $src));
+                $image->setAttribute('height', $height);
+                $image->setAttribute('width', $width);
+                $image->setAttribute('data-iframe-src', $src);
+                $image->setAttribute('data-iframe-number', $count);
 
-
-                        //replace iframe with image
-                        
-                         
-                        $iframe->parentNode->appendChild($play_script);
-                        $iframe->parentNode->replaceChild($image, $iframe);
-                  
-
+                //append the play button script to the end of the image                        
+                $iframe->parentNode->appendChild($play_script);
+                //replace iframe with image (with appended play script included)
+                $iframe->parentNode->replaceChild($image, $iframe);
+                
                 $count--; 
             }
+            //save our dom object to the content variable for output
             $content = $dom->saveHTML();
             return $content;
-
         }
 
         static function return_video_type( $video_object ) {
@@ -153,7 +150,6 @@ if ( ! class_exists( 'LowerMedia_iFrame_OnDemand' ) ) :
                 default:
                     $image_src = "http://img.youtube.com/vi/".$short_src."/0.jpg";
             }
-            
             return $image_src;
         }
 
