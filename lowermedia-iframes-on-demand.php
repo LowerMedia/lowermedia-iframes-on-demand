@@ -68,6 +68,7 @@ if ( ! class_exists( 'LowerMedia_iFrame_OnDemand' ) ) :
 
             // Setup DOMDocument object for parsing of HTML
             $dom = new DOMDocument;
+            // Wrap in conditional to prevent loading empty dom
             if($content!=''){$dom->loadHTML($content);}
             $iframes = $dom->getElementsByTagName('iframe'); 
             $count = $iframes->length - 1; 
