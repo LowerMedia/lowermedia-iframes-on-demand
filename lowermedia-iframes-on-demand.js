@@ -88,7 +88,7 @@ jQuery(document).ready(function(){
 		backCount--;
 
 		//CREATE IFRAME VIDEO TO BE SHOWN AFTER PLACEHOLDER IMAGE IS CLICKED
-		var video = '<iframe width="'+ jQuery(this).attr('width') +'" height="'+ jQuery(this).attr('height') +'" src="'+ jQuery(this).attr('data-iframe-src') +'"></iframe>';
+		var video = '<iframe class="'+jQuery(this).attr('data-iframe-class')+'" width="'+ jQuery(this).attr('width') +'" height="'+ jQuery(this).attr('height') +'" src="'+ jQuery(this).attr('data-iframe-src') +'"></iframe>';
 		var video_number = jQuery(this).attr('data-iframe-number');
 
 		//remove the play button on click
