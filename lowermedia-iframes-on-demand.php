@@ -142,7 +142,7 @@ if ( ! class_exists( 'LowerMedia_iFrame_OnDemand' ) ) :
                     $image_src = "http://img.youtube.com/vi/".$short_src."/0.jpg";
                     break;
                 case 'vimeo':
-                    $image_src = "http://img.youtube.com/vi/".$short_src."/0.jpg";
+                    $image_src = "http://i.vimeocdn.com/video/".$short_src.".jpg";
                     break;
                 case 'soundcloud':
                     $image_src = plugins_url( '/' , __FILE__ )."/iframe-on-demand-play-soundcloud.svg";
