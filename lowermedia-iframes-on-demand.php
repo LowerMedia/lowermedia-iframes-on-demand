@@ -58,6 +58,7 @@ if ( ! class_exists( 'LowerMedia_iFrame_OnDemand' ) ) :
             wp_register_script( 'iframe-ondemand', self::get_url( 'lowermedia-iframes-on-demand.js'), array( 'jquery' ), self::version, false);
             wp_enqueue_script( 'iframe-ondemand' );
             wp_localize_script('iframe-ondemand', 'iframeOnDemand', array('myurl' => plugins_url( '/' , __FILE__ )));
+            wp_enqueue_style( 'dashicons' );
         }
 
         static function add_iframe_placeholders( $content ) {
@@ -67,7 +68,7 @@ if ( ! class_exists( 'LowerMedia_iFrame_OnDemand' ) ) :
 
             // Setup DOMDocument object for parsing of HTML
             $dom = new DOMDocument;
-            $dom->loadHTML($content);
+            if($content!=''){$dom->loadHTML($content);}
             $iframes = $dom->getElementsByTagName('iframe'); 
             $count = $iframes->length - 1; 
 
