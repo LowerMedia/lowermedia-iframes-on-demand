@@ -92,15 +92,14 @@ if ( ! class_exists( 'LowerMedia_iFrame_OnDemand' ) ) :
                 $iframe = $iframes->item($count); 
                 $ignore = false; 
 
-                //test for no-placeholder class
-                // $classes = explode( " ",$iframe->getAttribute('class'));
-                // echo 'Classes:'.$classes[0].'<br />';
-                // foreach ($classes as $class){
-                //     if ($class==='no-placeholder')
-                //     {
-                //         $skip_to_next = true;
-                //     }
-                // }
+                 //test for no-placeholder class
+                $classes = explode( " ",$iframe->getAttribute('class'));
+                $placeholder_class = '';
+                foreach ($classes as $class){
+                    if ($class==='no-placeholder') {
+                        $placeholder_class = 'no-placeholder';
+                    }
+                }
 
                 //save iframe information to variables
                 $src = $iframe->getAttribute('src');
@@ -116,14 +115,15 @@ if ( ! class_exists( 'LowerMedia_iFrame_OnDemand' ) ) :
                 //build placeholder image
                 $image = $dom->createElement('img');
                 //set placeholder image attributes
-                $image->setAttribute('class', 'iframe-'.self::return_video_type($src).' iframe-'.$count.' iframe-ondemand-placeholderImg');
+                $image->setAttribute('class', 'iframe-'.self::return_video_type($src).' iframe-'.$count.' iframe-ondemand-placeholderImg '.$placeholder_class.'');
                 $image->setAttribute('src', self::build_placeholder_src($short_src, $src));
                 $image->setAttribute('height', $height);
                 $image->setAttribute('width', $width);
                 $image->setAttribute('data-iframe-src', $src);
                 $image->setAttribute('data-iframe-number', $count);
                 $image->setAttribute('data-iframe-type', self::return_video_type($src));
-
+                $image->setAttribute('data-iframe-class', $iframe->getAttribute('class'));
+                $image->setAttribute('data-iframe-class', $iframe->getAttribute('class'));
 
                 if ($count == $initial_count) {
                     //append the play button script single last image                        
