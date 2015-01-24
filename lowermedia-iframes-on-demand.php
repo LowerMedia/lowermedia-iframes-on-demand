@@ -52,6 +52,19 @@ if ( ! class_exists( 'LowerMedia_iFrame_OnDemand' ) ) :
 
             add_action( 'wp_enqueue_scripts', array( __CLASS__, 'add_scripts' ) );
             add_filter( 'the_content', array( __CLASS__, 'add_iframe_placeholders' ), 99 ); // run this later, so other content filters have run, including image_add_wh on WP.com
+            /**
+             *   ADD ATTRIBUTE TO SCRIPT
+             *   Disable cloudflare rocket loader as it breaks the plugin
+             *
+             */
+
+            add_filter( 'script_loader_tag', function ( $tag, $handle ) {
+
+                if ( 'jquery' !== $handle )
+                    return $tag;
+
+                return str_replace( "type='text/javascript' src", ' data-cfasync="false" src', $tag );
+            }, 10, 2 );
         }
 
         static function add_scripts() {
@@ -164,21 +177,6 @@ if ( ! class_exists( 'LowerMedia_iFrame_OnDemand' ) ) :
     LowerMedia_iFrame_OnDemand::init();
 
 endif;
-
-/**
- *   ADD ATTRIBUTE TO SCRIPT
- *   Disable cloudflare rocket loader as it breaks the plugin
- *
- */
-
-    add_filter( 'script_loader_tag', function ( $tag, $handle ) {
-
-        if ( 'jquery' !== $handle )
-            return $tag;
-
-        return str_replace( "type='text/javascript' src", ' data-cfasync="false" src', $tag );
-    }, 10, 2 );
-
 
 // Don't lazyload for feeds, previews, mobile
             //if( is_feed() || is_preview() || ( function_exists( 'is_mobile' ) && is_mobile() ) )
