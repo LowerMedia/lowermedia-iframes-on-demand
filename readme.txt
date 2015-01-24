@@ -8,11 +8,11 @@ Stable tag: 4.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Automatically add iframe placeholder images, reduce page requests, increase load speed!
+Automatically add iFrame placeholder images, reduce page requests, increase load speed!
 
 == Description ==
 
-Reduce requests and optimize for speed!!! The iFrames On Demand plugin replaces all iframes on the page with an image placeholder, when the image placeholder is clicked the image appears.  This works without any configuration for all iframes and will pull in video thumbnails for YouTube, Vimeo and DailyMotion.
+Reduce requests and optimize for speed!!! The iFrames On Demand plugin replaces all iFrames on the page with an image placeholder, when the image placeholder is clicked the image appears.  This works without any configuration for all iFrames and will pull in video thumbnails for YouTube, Vimeo and DailyMotion.
 
 == Installation ==
 
@@ -23,6 +23,11 @@ This section describes how to install the plugin and get it working.
 3. Enjoy
 
 == Frequently Asked Questions ==
+
+Q: How do I prevent iFrame on Demand Overlay on certain iFrames?
+
+A: Add class='no-placeholder' to the iFrame tag
+
 
 = Does this work automatically =
 
@@ -37,3 +42,7 @@ Manually through a child theme or css plugin
 = 1.0 =
 * Add theme files
 
+= 1.0.5 =
+* Namespacing with class
+* PHP/JS optimizations
+* User can now add the 'no-placeholder' class to the iFrame to prevent iFrame on demand placeholder overlay

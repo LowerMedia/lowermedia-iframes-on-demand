@@ -4,11 +4,22 @@
  *
  */
 
+//ADD THE DASHICON SPAN AFTER THE DIV SO OUR :BEFORE STYLES WORK
+jQuery(function() {
+
+	var precount = 0;
+	jQuery(".iframe-ondemand-placeholderImg").each(function(){
+		jQuery(this).after("<span class='dashicons dashicons-video-alt3 play-button-overlay play-button-overlay-"+precount+"'></span>");
+		precount++;
+	});
+
+});
+
 //BUILD VIMEO ONDEMAND PLACEHOLDER IMAGE
 function vimeoLoadingThumb(id) {
 
 	var url = "http://vimeo.com/api/v2/video/" + id + ".json?callback=showThumb";
-	console.log(url);
+	console.log('Vimeo Loading Thumb Function Output:'+url);
 	var id_img = "#vimeo-" + id;
 	var script = document.createElement( 'script' );
 	script.type = 'text/javascript';
@@ -24,6 +35,54 @@ function showThumb(data){
 	jQuery(id_img).attr( 'src', data[0].thumbnail_large );
 
 }
+
+jQuery(document).ready(function(){
+	//LET PEOPLE KNOW WE'RE UP AND RUNNING, ALSO FOR USE IN CSS SCRIPT
+	jQuery('body').addClass('iframes-ondemand');
+
+	//FIND THE VIMEO IMAGES AND REPLACE THEM WITH THE PROPER PLACEHOLDER IMAGE
+	jQuery(".iframe-vimeo").each(function() {
+
+		var  src = jQuery(this).attr('data-iframe-src'), //fetch plugin url path
+		shortSRC = src.substring(src.lastIndexOf( '/' ) + 1 );
+		shortSRC = shortSRC.split( '?' )[ 0 ];
+		jQuery(this).attr('id','vimeo-'+shortSRC);
+		vimeoLoadingThumb(shortSRC);
+
+	});
+
+	var backCount = jQuery(".iframe-ondemand-placeholderImg").size();
+	var count = 0;
+
+	//GRAB ALL IFRAMES WITH THE DESIGNATED CLASS
+	jQuery(".iframe-ondemand-placeholderImg").each(function(){
+
+		backCount--;
+
+		//CREATE IFRAME VIDEO TO BE SHOWN AFTER PLACEHOLDER IMAGE IS CLICKED
+		var video = '<iframe width="'+ jQuery(this).attr('width') +'" height="'+ jQuery(this).attr('height') +'" border="2" src="'+ jQuery(this).attr('data-iframe-src') +'"></iframe>';
+
+
+		//remove the play button on click
+		// jQuery(".play-button-overlay-"+backCount).click(function(){
+		// 	jQuery('.iframe-'+count).replaceWith(video);
+		// 	jQuery(this).remove();
+		// });
+
+		//remove the image and replace it with the iframe
+		jQuery('.iframe-'+count).click(function(){
+			jQuery(".play-button-overlay-"+backCount).remove();
+			jQuery(this).replaceWith(video);
+		});
+
+		count++;
+
+	});
+});
+
+/*
+
+
 
 //GET MEASUREMENT OF ORIGINAL IFRAME SOURCE, RETURNS HEIGHT OR WIDTH
 function getMeasurement(obj, measurement){
@@ -41,15 +100,8 @@ function getMeasurement(obj, measurement){
 
 }
 
-jQuery(document).ready(function(){
 
-	//IF THERE ARE NO IFRAMES END FUNCTION
-	if(jQuery("iframe").size() === 0){return;}
-
-	jQuery('body').addClass('iframes-ondemand');
-	var count = 0;
-
-	//SELECT EACH IFRAME FOR MANIPULATION
+//SELECT EACH IFRAME FOR MANIPULATION
 	jQuery("iframe").each(function() {
 
 		//IF THIS IFRAME HAS THE 'no-placeholder' CLASS WE MOVE ON TO THE NEXT
@@ -94,4 +146,4 @@ jQuery(document).ready(function(){
 			jQuery(this).replaceWith(video);
 		});
 	});
-});
+	*/
