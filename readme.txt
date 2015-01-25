@@ -42,12 +42,9 @@ Manually through a child theme or css plugin
 = 1.0 =
 * Add theme files
 
-= 1.0.5 =
+= 1.1.0 =
 * Namespacing with class
 * PHP/JS optimizations
-* User can now add the 'no-placeholder' class to the iFrame to prevent iFrame on demand placeholder overlay
-
-= 1.1.0 =
 * Manipulate iframes w/ content filter and add placeholder, then use js to add iframe back when clicked
 * Incorporate dashicons
-* Works much faster and saves much more request and reduces much more load time
+* Works much faster and saves much more requests and reduces much more load time
