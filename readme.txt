@@ -48,3 +48,8 @@ Manually through a child theme or css plugin
 * Manipulate iframes w/ content filter and add placeholder, then use js to add iframe back when clicked
 * Incorporate dashicons
 * Works much faster and saves much more requests and reduces much more load time
+
+= 1.2.0 =
+* Remove Dashicon (eliminate requests)
+* Pure CSS Play Button Overlay (reduce load time)
+* Feature: add the class 'no-placeholder' to your iframe in order to skip On Demand Overlay
