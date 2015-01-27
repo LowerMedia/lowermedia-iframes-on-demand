@@ -47,6 +47,7 @@ if ( ! class_exists( 'LowerMedia_iFrame_OnDemand' ) ) :
         const version = '1.1.0';
 
         static function init() {
+            
             if ( is_admin() )
                 return;
 
@@ -66,15 +67,17 @@ if ( ! class_exists( 'LowerMedia_iFrame_OnDemand' ) ) :
 
                 return str_replace( "type='text/javascript' src", ' data-cfasync="false" src', $tag );
             }, 10, 2 );
+
         }
 
         static function add_scripts() {
+
             wp_register_script( 'iframe-ondemand', self::get_url( 'lowermedia-iframes-on-demand.js'), array( 'jquery' ), self::version, false);
             wp_enqueue_script( 'iframe-ondemand' );
+
         }
 
         static function add_iframe_placeholders( $content ) {
-
             
             $dom = new DOMDocument; // Setup DOMDocument object for parsing of HTML
             if( $content!='' ){ $dom->loadHTML( $content ); } // Wrap in conditional to prevent loading empty dom
@@ -85,13 +88,15 @@ if ( ! class_exists( 'LowerMedia_iFrame_OnDemand' ) ) :
             while ($count > -1) { 
 
                 $iframe = $iframes->item($count); 
-
+                $placeholder_bool = false;
                 //test for no-placeholder class
                 $classes = explode( " ",$iframe->getAttribute('class'));
                 $placeholder_class = '';
                 foreach ($classes as $class){
                     if ($class==='no-placeholder') {
+                        echo "no placeholder class found";
                         $placeholder_class = 'no-placeholder';
+                        $placeholder_bool = true;
                     }
                 }
 
@@ -120,23 +125,30 @@ if ( ! class_exists( 'LowerMedia_iFrame_OnDemand' ) ) :
                 $image->setAttribute('data-iframe-class', $iframe->getAttribute('class'));
                 $image->setAttribute('data-iframe-class', $iframe->getAttribute('class'));
 
-                if ($count == $initial_count) {
-                    //append the play button script single last image                        
-                    $iframe->parentNode->appendChild($play_script_single);
+                // if the iframe has the no-placeholder class do not make it an image
+                if ($placeholder_bool===false){
+                    if ($count == $initial_count) {
+                        //append the play button script single last image                        
+                        $iframe->parentNode->appendChild($play_script_single);
+                    }
+
+                    //append the play button script to the end of the image                        
+                    $iframe->parentNode->appendChild($play_script);
+                    //replace iframe with image (with appended play script included)
+                    $iframe->parentNode->replaceChild($image, $iframe);                    
                 }
-                //append the play button script to the end of the image                        
-                $iframe->parentNode->appendChild($play_script);
-                //replace iframe with image (with appended play script included)
-                $iframe->parentNode->replaceChild($image, $iframe);
-                
-                $count--; 
+
+                $count--;
             }
+
             //save our dom object to the content variable for output
             $content = $dom->saveHTML();
             return $content;
+
         }
 
         static function return_video_type( $video_object ) {
+
             if (strpos($video_object,'youtube') > 0){
                 return 'youtube';
             } elseif (strpos($video_object,'vimeo') > 0){
@@ -148,9 +160,11 @@ if ( ! class_exists( 'LowerMedia_iFrame_OnDemand' ) ) :
             } else {
                 return 'undetermined';
             }
+
         }
 
         static function build_placeholder_src( $short_src, $src ){
+
             $type = self::return_video_type($src);
             switch ($type) {
                 case 'youtube':
@@ -169,6 +183,7 @@ if ( ! class_exists( 'LowerMedia_iFrame_OnDemand' ) ) :
                     $image_src = "http://img.youtube.com/vi/".$short_src."/0.jpg";
             }
             return $image_src;
+
         }
 
         static function get_url( $path = '' ) {
