@@ -70,8 +70,8 @@ if ( ! class_exists( 'LowerMedia_iFrame_OnDemand' ) ) :
         static function add_scripts() {
             wp_register_script( 'iframe-ondemand', self::get_url( 'lowermedia-iframes-on-demand.js'), array( 'jquery' ), self::version, false);
             wp_enqueue_script( 'iframe-ondemand' );
-            wp_localize_script('iframe-ondemand', 'iframeOnDemand', array('myurl' => plugins_url( '/' , __FILE__ )));
-            wp_enqueue_style( 'dashicons' );
+            //wp_localize_script('iframe-ondemand', 'iframeOnDemand', array('myurl' => plugins_url( '/' , __FILE__ )));
+            //wp_enqueue_style( 'dashicons' );
         }
 
         static function add_iframe_placeholders( $content ) {
