@@ -8,7 +8,7 @@ Stable tag: 4.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Automatically add iFrame placeholder images, reduce page requests, increase load speed!
+Automatically add iFrame placeholder images, reduce page requests, decrease load time!
 
 == Description ==
 
