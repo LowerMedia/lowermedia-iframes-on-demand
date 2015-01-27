@@ -92,7 +92,7 @@ if ( ! class_exists( 'LowerMedia_iFrame_OnDemand' ) ) :
                 $iframe = $iframes->item($count); 
                 $ignore = false; 
 
-                 //test for no-placeholder class
+                //test for no-placeholder class
                 $classes = explode( " ",$iframe->getAttribute('class'));
                 $placeholder_class = '';
                 foreach ($classes as $class){
