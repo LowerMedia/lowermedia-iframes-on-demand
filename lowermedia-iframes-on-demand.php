@@ -52,6 +52,7 @@ if ( ! class_exists( 'LowerMedia_iFrame_OnDemand' ) ) :
 
             add_action( 'wp_enqueue_scripts', array( __CLASS__, 'add_scripts' ) );
             add_filter( 'the_content', array( __CLASS__, 'add_iframe_placeholders' ), 99 ); // run this later, so other content filters have run, including image_add_wh on WP.com
+
             /**
              *   ADD ATTRIBUTE TO SCRIPT
              *   Disable cloudflare rocket loader as it breaks the plugin
@@ -70,19 +71,13 @@ if ( ! class_exists( 'LowerMedia_iFrame_OnDemand' ) ) :
         static function add_scripts() {
             wp_register_script( 'iframe-ondemand', self::get_url( 'lowermedia-iframes-on-demand.js'), array( 'jquery' ), self::version, false);
             wp_enqueue_script( 'iframe-ondemand' );
-            //wp_localize_script('iframe-ondemand', 'iframeOnDemand', array('myurl' => plugins_url( '/' , __FILE__ )));
-            //wp_enqueue_style( 'dashicons' );
         }
 
         static function add_iframe_placeholders( $content ) {
 
-            // In case you want to change the placeholder image
-            //$placeholder_image = apply_filters( 'lowermedia_iframe_ondemand_placeholder_image', self::get_url( 'images/1x1.trans.gif' ) );
-
-            // Setup DOMDocument object for parsing of HTML
-            $dom = new DOMDocument;
-            // Wrap in conditional to prevent loading empty dom
-            if($content!=''){$dom->loadHTML($content);}
+            
+            $dom = new DOMDocument; // Setup DOMDocument object for parsing of HTML
+            if( $content!='' ){ $dom->loadHTML( $content ); } // Wrap in conditional to prevent loading empty dom
             $iframes = $dom->getElementsByTagName('iframe'); 
             $count = $iframes->length - 1;
             $initial_count = $iframes->length - 1; 
@@ -90,7 +85,6 @@ if ( ! class_exists( 'LowerMedia_iFrame_OnDemand' ) ) :
             while ($count > -1) { 
 
                 $iframe = $iframes->item($count); 
-                $ignore = false; 
 
                 //test for no-placeholder class
                 $classes = explode( " ",$iframe->getAttribute('class'));
@@ -107,15 +101,9 @@ if ( ! class_exists( 'LowerMedia_iFrame_OnDemand' ) ) :
                 $short_src = $short_src[0];//build the short src for later use
                 $width = $iframe->getAttribute('width');
                 $height = $iframe->getAttribute('height');
-                $play_button_marleft = $width/0.94107;
-                $play_button_martop = $height/2.60;
-                // $play_button_marleft2 = self::return_video_sizing($src, $width, 'width');
-                // $play_button_martop2 = self::return_video_sizing($src, $height, 'height');
-                $play_button_marleft2 = $width/1.70;
-                $play_button_martop2 = $height/3.00;
-                //$play_script = $dom->createElement( 'style' , '.iframe-'.$count.'{height:'.$height.'px;width:'.$width.'px;} .iframes-ondemand .'.self::return_video_type($src).'-dashicon.dashicons-video-alt3:before { margin-left:-'.$play_button_marleft.'px; margin-top:'.$play_button_martop.'px; display: inline-block; } .'.self::return_video_type($src).'-iframe-play-block { margin-left:-'.$play_button_marleft2.'px; margin-top:'.$play_button_martop2.'px; display: inline-block; }' );
-                //$play_script_single = $dom->createElement( 'style' , '.iframes-ondemand .dashicons { content: "\f236"; font-size: 75px; color: rgba(204, 24, 30, 0.85); } .iframes-ondemand .dashicons:hover { color: rgba(128, 128, 128, 0.85); }' );
-                $play_script = $dom->createElement( 'style' , '.iframe-'.$count.'{height:'.$height.'px;width:'.$width.'px;} .'.self::return_video_type($src).'-iframe-play-block { margin-left:-'.$play_button_marleft2.'px; margin-top:'.$play_button_martop2.'px; display: inline-block; }' );
+                $play_button_marleft = $width/1.70;
+                $play_button_martop = $height/3.00;
+                $play_script = $dom->createElement( 'style' , '.iframe-'.$count.'{height:'.$height.'px;width:'.$width.'px;} .'.self::return_video_type($src).'-iframe-play-block { margin-left:-'.$play_button_marleft.'px; margin-top:'.$play_button_martop.'px; display: inline-block; }' );
                 $play_script_single = $dom->createElement( 'style' , ' .iframe-play-block .play-button-inner:hover { border-left-color: rgba(128, 128, 128, 0.85) !important; }' );
                 
 
@@ -147,63 +135,6 @@ if ( ! class_exists( 'LowerMedia_iFrame_OnDemand' ) ) :
             $content = $dom->saveHTML();
             return $content;
         }
-
-        // static function return_video_sizing( $video_object, $input_measurment, $output_measurement  ) {
-        //     if (strpos($video_object,'youtube') > 0){
-
-        //         $width_denominator = 1.70;
-        //         $height_denominator = 3.00;
-
-        //         if ($output_measurement=='width'){
-        //             return $input_measurment/$width_denominator;
-        //         } elseif ($output_measurement=='height'){
-        //             return $input_measurment/$height_denominator;
-        //         } else { return 1; }
-
-        //     } elseif (strpos($video_object,'vimeo') > 0){
-        //         $width_denominator = 1.70;
-        //         $height_denominator = 3.00;
-
-        //         if ($output_measurement=='width'){
-        //             return $input_measurment/$width_denominator;
-        //         } elseif ($output_measurement=='height'){
-        //             return $input_measurment/$height_denominator;
-        //         } else { return 1; }
-        //     } elseif (strpos($video_object,'soundcloud') > 0){
-
-        //         $width_denominator = 1.70;
-        //         $height_denominator = 3.00;
-
-        //         if ($output_measurement=='width'){
-        //             return $input_measurment/$width_denominator;
-        //         } elseif ($output_measurement=='height'){
-        //             return $input_measurment/$height_denominator;
-        //         } else { return 1; }
-
-        //     } elseif (strpos($video_object,'dailymotion') > 0){
-
-        //         $width_denominator = 1.70;
-        //         $height_denominator = 3.00;
-
-        //         if ($output_measurement=='width'){
-        //             return $input_measurment/$width_denominator;
-        //         } elseif ($output_measurement=='height'){
-        //             return $input_measurment/$height_denominator;
-        //         } else { return 1; }
-
-        //     } else {
-
-        //         $width_denominator = 1.70;
-        //         $height_denominator = 3.00;
-
-        //         if ($output_measurement=='width'){
-        //             return $input_measurment/$width_denominator;
-        //         } elseif ($output_measurement=='height'){
-        //             return $input_measurment/$height_denominator;
-        //         } else { return 1; }
-
-        //     }
-        // }
 
         static function return_video_type( $video_object ) {
             if (strpos($video_object,'youtube') > 0){
