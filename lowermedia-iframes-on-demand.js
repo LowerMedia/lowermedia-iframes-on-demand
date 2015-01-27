@@ -10,7 +10,6 @@ jQuery(function() {
 	jQuery(".iframe-ondemand-placeholderImg").each(function(){
 
 		var video_type = jQuery(this).attr('data-iframe-type');
-		//jQuery(this).after("<span class='"+video_type+"-dashicon dashicons dashicons-video-alt3 play-button-overlay play-button-overlay-"+precount+"'></span><div class='iframe-play-block "+video_type+"-iframe-play-block play-button-overlay play-button-overlay-"+precount+"' style='position: absolute; width: 200px; height: 200px;'> <span class='play-button' style='width: 100px; height: 100px; position: absolute; top: 48px; right: 48px; border: 4px solid rgba(204, 24, 30, 0.85); border-radius: 54px;'> <span class='play-button-inner' style='position: absolute; top: 11px; left: 26px; width: 0; height: 0; border-top: 36px solid transparent; border-bottom: 36px solid transparent; border-left: 60px solid rgba(204, 24, 30, 0.85);'></span></span></div>	");
 		jQuery(this).after("<div class='iframe-play-block "+video_type+"-iframe-play-block play-button-overlay play-button-overlay-"+precount+"' style='position: absolute; width: 100px; height: 100px;'> <span class='play-button' style='width: 100px; height: 100px; position: absolute; border: 4px solid rgba(204, 24, 30, 0.85); border-radius: 54px;'> <span class='play-button-inner' style='position: absolute; top: 11px; left: 26px; width: 0; height: 0; border-top: 36px solid transparent; border-bottom: 36px solid transparent; border-left: 60px solid rgba(204, 24, 30, 0.85);'></span></span></div>	");
 		precount++;
 
