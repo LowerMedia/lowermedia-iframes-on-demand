@@ -91,11 +91,8 @@ if ( ! class_exists( 'LowerMedia_iFrame_OnDemand' ) ) :
                 $placeholder_bool = false;
                 //test for no-placeholder class
                 $classes = explode( " ",$iframe->getAttribute('class'));
-                $placeholder_class = '';
                 foreach ($classes as $class){
                     if ($class==='no-placeholder') {
-                        echo "no placeholder class found";
-                        $placeholder_class = 'no-placeholder';
                         $placeholder_bool = true;
                     }
                 }
@@ -115,7 +112,7 @@ if ( ! class_exists( 'LowerMedia_iFrame_OnDemand' ) ) :
                 //build placeholder image
                 $image = $dom->createElement('img');
                 //set placeholder image attributes
-                $image->setAttribute('class', 'iframe-'.self::return_video_type($src).' iframe-'.$count.' iframe-ondemand-placeholderImg '.$placeholder_class.'');
+                $image->setAttribute('class', 'iframe-'.self::return_video_type($src).' iframe-'.$count.' iframe-ondemand-placeholderImg');
                 $image->setAttribute('src', self::build_placeholder_src($short_src, $src));
                 $image->setAttribute('height', $height);
                 $image->setAttribute('width', $width);
@@ -131,7 +128,6 @@ if ( ! class_exists( 'LowerMedia_iFrame_OnDemand' ) ) :
                         //append the play button script single last image                        
                         $iframe->parentNode->appendChild($play_script_single);
                     }
-
                     //append the play button script to the end of the image                        
                     $iframe->parentNode->appendChild($play_script);
                     //replace iframe with image (with appended play script included)
