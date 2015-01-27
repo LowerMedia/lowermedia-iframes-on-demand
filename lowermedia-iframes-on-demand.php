@@ -109,9 +109,16 @@ if ( ! class_exists( 'LowerMedia_iFrame_OnDemand' ) ) :
                 $height = $iframe->getAttribute('height');
                 $play_button_marleft = $width/0.94107;
                 $play_button_martop = $height/2.60;
-                $play_script = $dom->createElement( 'style' , '.iframe-'.$count.'{height:'.$height.'px;width:'.$width.'px;} .iframes-ondemand .'.self::return_video_type($src).'-dashicon.dashicons-video-alt3:before { margin-left:-'.$play_button_marleft.'px; margin-top:'.$play_button_martop.'px; display: inline-block; }' );
-                $play_script_single = $dom->createElement( 'style' , '.iframes-ondemand .dashicons { content: "\f236"; font-size: 75px; color: rgba(204, 24, 30, 0.85); } .iframes-ondemand .dashicons:hover { color: rgba(128, 128, 128, 0.85); }' );
+                // $play_button_marleft2 = self::return_video_sizing($src, $width, 'width');
+                // $play_button_martop2 = self::return_video_sizing($src, $height, 'height');
+                $play_button_marleft2 = $width/1.70;
+                $play_button_martop2 = $height/3.00;
+                //$play_script = $dom->createElement( 'style' , '.iframe-'.$count.'{height:'.$height.'px;width:'.$width.'px;} .iframes-ondemand .'.self::return_video_type($src).'-dashicon.dashicons-video-alt3:before { margin-left:-'.$play_button_marleft.'px; margin-top:'.$play_button_martop.'px; display: inline-block; } .'.self::return_video_type($src).'-iframe-play-block { margin-left:-'.$play_button_marleft2.'px; margin-top:'.$play_button_martop2.'px; display: inline-block; }' );
+                //$play_script_single = $dom->createElement( 'style' , '.iframes-ondemand .dashicons { content: "\f236"; font-size: 75px; color: rgba(204, 24, 30, 0.85); } .iframes-ondemand .dashicons:hover { color: rgba(128, 128, 128, 0.85); }' );
+                $play_script = $dom->createElement( 'style' , '.iframe-'.$count.'{height:'.$height.'px;width:'.$width.'px;} .'.self::return_video_type($src).'-iframe-play-block { margin-left:-'.$play_button_marleft2.'px; margin-top:'.$play_button_martop2.'px; display: inline-block; }' );
+                $play_script_single = $dom->createElement( 'style' , ' .iframe-play-block .play-button-inner:hover { border-left-color: rgba(128, 128, 128, 0.85) !important; }' );
                 
+
                 //build placeholder image
                 $image = $dom->createElement('img');
                 //set placeholder image attributes
@@ -140,6 +147,63 @@ if ( ! class_exists( 'LowerMedia_iFrame_OnDemand' ) ) :
             $content = $dom->saveHTML();
             return $content;
         }
+
+        // static function return_video_sizing( $video_object, $input_measurment, $output_measurement  ) {
+        //     if (strpos($video_object,'youtube') > 0){
+
+        //         $width_denominator = 1.70;
+        //         $height_denominator = 3.00;
+
+        //         if ($output_measurement=='width'){
+        //             return $input_measurment/$width_denominator;
+        //         } elseif ($output_measurement=='height'){
+        //             return $input_measurment/$height_denominator;
+        //         } else { return 1; }
+
+        //     } elseif (strpos($video_object,'vimeo') > 0){
+        //         $width_denominator = 1.70;
+        //         $height_denominator = 3.00;
+
+        //         if ($output_measurement=='width'){
+        //             return $input_measurment/$width_denominator;
+        //         } elseif ($output_measurement=='height'){
+        //             return $input_measurment/$height_denominator;
+        //         } else { return 1; }
+        //     } elseif (strpos($video_object,'soundcloud') > 0){
+
+        //         $width_denominator = 1.70;
+        //         $height_denominator = 3.00;
+
+        //         if ($output_measurement=='width'){
+        //             return $input_measurment/$width_denominator;
+        //         } elseif ($output_measurement=='height'){
+        //             return $input_measurment/$height_denominator;
+        //         } else { return 1; }
+
+        //     } elseif (strpos($video_object,'dailymotion') > 0){
+
+        //         $width_denominator = 1.70;
+        //         $height_denominator = 3.00;
+
+        //         if ($output_measurement=='width'){
+        //             return $input_measurment/$width_denominator;
+        //         } elseif ($output_measurement=='height'){
+        //             return $input_measurment/$height_denominator;
+        //         } else { return 1; }
+
+        //     } else {
+
+        //         $width_denominator = 1.70;
+        //         $height_denominator = 3.00;
+
+        //         if ($output_measurement=='width'){
+        //             return $input_measurment/$width_denominator;
+        //         } elseif ($output_measurement=='height'){
+        //             return $input_measurment/$height_denominator;
+        //         } else { return 1; }
+
+        //     }
+        // }
 
         static function return_video_type( $video_object ) {
             if (strpos($video_object,'youtube') > 0){
